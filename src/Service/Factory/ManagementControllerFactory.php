@@ -25,7 +25,7 @@ class ManagementControllerFactory implements FactoryInterface
     {
         $realServiceLocator = $serviceLocator->getServiceLocator();
         $eventHandler = null;
-        $doctrineService = $realServiceLocator->get('doctrine.authenticationservice.orm_default');
+        $doctrineService = $realServiceLocator->get('Doctrine\ORM\EntityManager');
         $services = array("doctrine"=>$doctrineService);
         return new ManagementController($services,$eventHandler);
     }
