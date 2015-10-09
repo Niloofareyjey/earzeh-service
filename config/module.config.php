@@ -1,22 +1,8 @@
 <?php
-namespace User;
+namespace Service;
 
 return array(
-    'doctrine' => array(
-        'driver' => array(
-            __NAMESPACE__.'_driver' => array(
-                'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/'.__NAMESPACE__.'/Entity')
-            ),
-
-            'orm_default' => array(
-                'drivers' => array(
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                )
-
-            )),
-    ),
+  
 
     'view_manager' => array(
         'template_path_stack' => array(
@@ -29,7 +15,7 @@ return array(
 
     'controllers' => array(
         'factories' => array(
-        // for passing variables
+            'management' => 'Service\Factory\ManagementControllerFactory',
         ),
         'invokables' =>array(
             //without passing variable controlers
@@ -48,21 +34,21 @@ return array(
         // Open configuration for all possible routes
         'routes' => array(
             // Define a new route called "post"
-            'user' => array(
+            'service' => array(
                 // Define the routes type to be "Zend\Mvc\Router\Http\Literal", which is basically just a string
                 'type' => 'segment',
                 // Configure the route itself
                 'options' => array(
                     // Listen to "/blog" as uri
-                    'route'    => '/services[/:controller[/:action]]',
+                    'route'    => '/service[/:controller[/:action]]',
                     'constraints' => array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
 
                     ),
                     // Define default controller and action to be called when this route is matched
                     'defaults' => array(
-                        'controller' => 'index',
-                        'action'     => 'index',
+                        'controller' => 'management',
+                        'action'     => 'create',
                     )
                 )
             )
